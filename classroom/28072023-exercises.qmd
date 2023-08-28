@@ -1,6 +1,7 @@
 ---
 title: "28072023-exercises"
 author: "Ndey Isatou Jobe"
+#format: docx
 #execute: 
 #  echo: false
 ---
