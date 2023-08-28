@@ -1,14 +1,18 @@
 ---
-title: "28072023-exercises"
+title: "Homework 0"
 author: "Ndey Isatou Jobe"
-#format: docx
-#execute: 
-#  echo: false
+format: html
+execute: 
+  echo: false
 ---
 
 # Solutions:
 
-## The givens of the quadratic equation are:
+## The quadratic equation is:
+
+$$
+f(x) = ax^2 + bx +c
+$$
 
 ```{r}
 # Given values
@@ -20,9 +24,7 @@ c = 2
 coefficients <- c(a, b, c)
 ```
 
-
-
-## Roots of the quadratic equation calculated using the quadratic equation formula:
+## The roots of the quadratic equation are:
 
 ```{r}
 # Quadratic equation: ax^2 + bx + c
@@ -49,7 +51,7 @@ if (discriminant >= 0) {
 }
 ```
 
-## x-values for the plot:
+## x-values for the plot are:
 
 ```{r}
 # x values
@@ -57,7 +59,7 @@ x_vals <- seq(from = -5, to = 5, length.out = 100)
 print(x_vals)
 ```
 
-## The corresponding y values using the quadratic equation:
+## The corresponding y values are:
 
 ```{r}
 # Corresponding y values
