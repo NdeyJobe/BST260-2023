@@ -8,7 +8,7 @@ author: "Ndey Isatou Jobe"
 
 # Solutions:
 
-## Roots of the quadratic equation using the polyroot function:
+## The givens of the quadratic equation are:
 
 ```{r}
 # Given values
@@ -18,13 +18,9 @@ c = 2
 
 # Coefficients of the quadratic equation
 coefficients <- c(a, b, c)
-
-# Solve the quadratic equation
-roots <- polyroot(coefficients)
-
-# Print the roots
-cat(" Root 1:", roots[1], "\n", "Root 2:", roots[2], "\n")
 ```
+
+
 
 ## Roots of the quadratic equation calculated using the quadratic equation formula:
 
