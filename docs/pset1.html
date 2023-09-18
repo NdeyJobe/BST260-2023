@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>BST 260 Introduction to Data Science - 1&nbsp; Quarto</title>
+<title>BST 260 Introduction to Data Science - Problem Set 1</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./02-unix.html" rel="next">
-<link href="./schedule.html" rel="prev">
+<link href="./10-distributions.html" rel="next">
+<link href="./09-data-table.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -95,8 +95,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -110,7 +108,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-quarto.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Quarto</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./pset1.html">Problem Set 1</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -163,7 +161,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-quarto.html" class="sidebar-item-text sidebar-link active">
+  <a href="./01-quarto.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Quarto</span></span></a>
   </div>
 </li>
@@ -217,7 +215,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pset1.html" class="sidebar-item-text sidebar-link">
+  <a href="./pset1.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Problem Set 1</span></a>
   </div>
 </li>
@@ -243,40 +241,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#r-and-rstudio" id="toc-r-and-rstudio" class="nav-link active" data-scroll-target="#r-and-rstudio"><span class="header-section-number">1.1</span> R and RStudio</a>
-  <ul class="collapse">
-  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation"><span class="header-section-number">1.1.1</span> Installation</a></li>
-  <li><a href="#basics" id="toc-basics" class="nav-link" data-scroll-target="#basics"><span class="header-section-number">1.1.2</span> Basics</a></li>
-  <li><a href="#projects" id="toc-projects" class="nav-link" data-scroll-target="#projects"><span class="header-section-number">1.1.3</span> Projects</a></li>
-  </ul></li>
-  <li><a href="#markdown" id="toc-markdown" class="nav-link" data-scroll-target="#markdown"><span class="header-section-number">1.2</span> Markdown</a>
-  <ul class="collapse">
-  <li><a href="#type-of-editor" id="toc-type-of-editor" class="nav-link" data-scroll-target="#type-of-editor"><span class="header-section-number">1.2.1</span> Type of editor</a></li>
-  <li><a href="#the-header" id="toc-the-header" class="nav-link" data-scroll-target="#the-header"><span class="header-section-number">1.2.2</span> The header</a></li>
-  <li><a href="#text-formating" id="toc-text-formating" class="nav-link" data-scroll-target="#text-formating"><span class="header-section-number">1.2.3</span> Text formating</a></li>
-  <li><a href="#headings" id="toc-headings" class="nav-link" data-scroll-target="#headings"><span class="header-section-number">1.2.4</span> Headings</a></li>
-  <li><a href="#links" id="toc-links" class="nav-link" data-scroll-target="#links"><span class="header-section-number">1.2.5</span> Links</a></li>
-  <li><a href="#images" id="toc-images" class="nav-link" data-scroll-target="#images"><span class="header-section-number">1.2.6</span> Images</a></li>
-  <li><a href="#lists" id="toc-lists" class="nav-link" data-scroll-target="#lists"><span class="header-section-number">1.2.7</span> Lists</a></li>
-  <li><a href="#equations" id="toc-equations" class="nav-link" data-scroll-target="#equations"><span class="header-section-number">1.2.8</span> Equations</a></li>
-  </ul></li>
-  <li><a href="#computations" id="toc-computations" class="nav-link" data-scroll-target="#computations"><span class="header-section-number">1.3</span> Computations</a>
-  <ul class="collapse">
-  <li><a href="#academic-reports" id="toc-academic-reports" class="nav-link" data-scroll-target="#academic-reports"><span class="header-section-number">1.3.1</span> Academic reports</a></li>
-  <li><a href="#global-execution-options" id="toc-global-execution-options" class="nav-link" data-scroll-target="#global-execution-options"><span class="header-section-number">1.3.2</span> Global execution options</a></li>
-  <li><a href="#more-on-markdown" id="toc-more-on-markdown" class="nav-link" data-scroll-target="#more-on-markdown"><span class="header-section-number">1.3.3</span> More on markdown</a></li>
-  </ul></li>
-  <li><a href="#sec-knitr" id="toc-sec-knitr" class="nav-link" data-scroll-target="#sec-knitr"><span class="header-section-number">1.4</span> knitR</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">1.5</span> Exercises</a></li>
+  <li><a href="#measles" id="toc-measles" class="nav-link active" data-scroll-target="#measles">Measles</a></li>
+  <li><a href="#covid-19" id="toc-covid-19" class="nav-link" data-scroll-target="#covid-19">COVID-19</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/datasciencelabs/2023/blob/main/01-quarto.qmd" class="toc-action">View source</a></p><p><a href="https://github.com/datasciencelabs/2023/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/datasciencelabs/2023/blob/main/pset1.qmd" class="toc-action">View source</a></p><p><a href="https://github.com/datasciencelabs/2023/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Quarto</span></h1>
+<h1 class="title">Problem Set 1</h1>
 </div>
 
 
@@ -291,198 +266,90 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p>Your task is to produce a report in PDF that solves the quadratic equations <span class="math inline">\(ax^2+bx+c=0\)</span> for <span class="math inline">\(a=1, b=-1, c=-2\)</span> and shows a plot of the function to confirm the finding.</p>
-<p>But after you are done, I will discover I made a mistake and ask you to rewrite the report with <span class="math inline">\(a=1, b=3, c=-2\)</span> (or any number).</p>
-<p>Then once you are done, I will like the report so much I will ask you to make an html page displaying the result and showing and explaining the code you used.</p>
-<p>We will do all this using R, RStudio, Quarto, and knitr.</p>
-<section id="r-and-rstudio" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="r-and-rstudio"><span class="header-section-number">1.1</span> R and RStudio</h2>
-<p>Before introducing Quarto we need R installed. We highly recommend using RStudio as an IDE for this course. We will be using it in lectures.</p>
-<section id="installation" class="level3" data-number="1.1.1">
-<h3 data-number="1.1.1" class="anchored" data-anchor-id="installation"><span class="header-section-number">1.1.1</span> Installation</h3>
+<p>This is a preliminary version of problem set 1. The final version will be shared through GitHub.</p>
+<p>Reminders:</p>
 <ul>
-<li><a href="https://cloud.r-project.org/">Install the latest version (4.3.1) of R</a></li>
-<li><a href="https://posit.co/download/rstudio-desktop/">Install RStudio</a></li>
+<li>Add a title to all your graphs.</li>
+<li>Add a label to the x and y axes when not obvious what they are showing.</li>
+<li>Think about transformations that convey the message in clearer fashion.</li>
 </ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="http://rafalab.dfci.harvard.edu/dsbook-part-1/R/img/rstudio.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">rstudio</figcaption>
-</figure>
-</div>
-</section>
-<section id="basics" class="level3" data-number="1.1.2">
-<h3 data-number="1.1.2" class="anchored" data-anchor-id="basics"><span class="header-section-number">1.1.2</span> Basics</h3>
-<p>Let’s try a few things together:</p>
-<ul>
-<li>Open a new R script file</li>
-<li>Learn tab complete</li>
-<li>Run commands while editing scripts</li>
-<li>Run the entire script</li>
-<li>Make a plot</li>
-<li>Change options to never save workspace.</li>
-</ul>
-</section>
-<section id="projects" class="level3" data-number="1.1.3">
-<h3 data-number="1.1.3" class="anchored" data-anchor-id="projects"><span class="header-section-number">1.1.3</span> Projects</h3>
-<ul>
-<li>Start new project in exciting directory.</li>
-<li>Start new project in new directory.</li>
-<li>Change projects.</li>
-</ul>
-</section>
-</section>
-<section id="markdown" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="markdown"><span class="header-section-number">1.2</span> Markdown</h2>
-<p>Start a new Quarto.</p>
-<section id="type-of-editor" class="level3" data-number="1.2.1">
-<h3 data-number="1.2.1" class="anchored" data-anchor-id="type-of-editor"><span class="header-section-number">1.2.1</span> Type of editor</h3>
-<ul>
-<li>Source - See the actual code (WYSIWYG).</li>
-<li>Visual - Partial preview of final document.</li>
-</ul>
-</section>
-<section id="the-header" class="level3" data-number="1.2.2">
-<h3 data-number="1.2.2" class="anchored" data-anchor-id="the-header"><span class="header-section-number">1.2.2</span> The header</h3>
-<p>At the top you see:</p>
-<pre><code>---
-title: "Untitled"
----</code></pre>
-<p>The things between the <code>---</code> is the <em>YAML</em> header.</p>
-<p>You will see it used throughout the <a href="https://quarto.org/docs/guide/">Quarto guide</a>.</p>
-</section>
-<section id="text-formating" class="level3" data-number="1.2.3">
-<h3 data-number="1.2.3" class="anchored" data-anchor-id="text-formating"><span class="header-section-number">1.2.3</span> Text formating</h3>
-<p><em>italics</em>, <strong>bold</strong>, <strong><em>bold italics</em></strong></p>
-<p><sub>strikethrough</sub></p>
-<p><code>code</code></p>
-</section>
-<section id="headings" class="level3" data-number="1.2.4">
-<h3 data-number="1.2.4" class="anchored" data-anchor-id="headings"><span class="header-section-number">1.2.4</span> Headings</h3>
-<p><code># Header 1</code></p>
-<p><code>## Header 2</code></p>
-<p><code>### Header 3</code></p>
-<p>and so on</p>
-</section>
-<section id="links" class="level3" data-number="1.2.5">
-<h3 data-number="1.2.5" class="anchored" data-anchor-id="links"><span class="header-section-number">1.2.5</span> Links</h3>
-<p>Just the link: <a href="https://quarto.org/docs/guide/" class="uri">https://quarto.org/docs/guide/</a></p>
-<p>Linked text: <a href="https://quarto.org/docs/guide/">This is the link to Quarto Guide</a></p>
-</section>
-<section id="images" class="level3" data-number="1.2.6">
-<h3 data-number="1.2.6" class="anchored" data-anchor-id="images"><span class="header-section-number">1.2.6</span> Images</h3>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://datasciencedojo.com/wp-content/uploads/11-1.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">First week of data science</figcaption>
-</figure>
-</div>
-<p>The image can also be a local file.</p>
-</section>
-<section id="lists" class="level3" data-number="1.2.7">
-<h3 data-number="1.2.7" class="anchored" data-anchor-id="lists"><span class="header-section-number">1.2.7</span> Lists</h3>
-<p>Bullets:</p>
-<ul>
-<li>bullet 1
-<ul>
-<li>sub-bullet 1</li>
-<li>sub-bullet 2</li>
-</ul></li>
-<li>bullet 2</li>
-</ul>
-<p>Ordered list</p>
-<ol type="1">
-<li>Item 1</li>
-<li>Item 2</li>
-</ol>
-</section>
-<section id="equations" class="level3" data-number="1.2.8">
-<h3 data-number="1.2.8" class="anchored" data-anchor-id="equations"><span class="header-section-number">1.2.8</span> Equations</h3>
-<p>Inline: <span class="math inline">\(Y_i = \beta_0 + \beta_1 x_i + \varepsilon_i\)</span></p>
-<p>Display math:</p>
-<p><span class="math display">\[
-\mathbf{Y} = \mathbf{X\beta} + \mathbf{\varepsilon}
-\]</span></p>
-</section>
-</section>
-<section id="computations" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="computations"><span class="header-section-number">1.3</span> Computations</h2>
-<p>The main reason we use Quarto is because we can include code and execute the code when compiling the document. In R we refer to them as R chunks.</p>
-<p>To add your own R chunks, you can type the characters above quickly with the key binding command-option-I on the Mac and Ctrl-Alt-I on Windows.</p>
-<p>This applies to plots as well; the plot will be placed in that position. We can write something like this:</p>
-<div class="cell" data-hash="01-quarto_cache/html/unnamed-chunk-1_66999f46dcbf54e155119bb7b25bddfc">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>x <span class="sc">+</span> y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 3</code></pre>
-</div>
-</div>
-<p>By default, the code will show up as well. To avoid having the code show up, you can use an argument, which are annotated with <code>|#</code> To avoid showing code in the final document, you can use the argument <code>echo: FALSE</code>. For example:</p>
-<div class="cell" data-hash="01-quarto_cache/html/unnamed-chunk-2_c5ef9bb036fd8e945942aadd52ed8283">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 3</code></pre>
-</div>
-</div>
-<p>We recommend getting into the habit of adding a label to the R code chunks. This will be very useful when debugging, among other situations. You do this by adding a descriptive word like this:</p>
-<div class="cell" data-hash="01-quarto_cache/html/one-plus-two_1f3587b75aab4073e836829c15435978">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>x <span class="sc">+</span> y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 3</code></pre>
-</div>
-</div>
-<section id="academic-reports" class="level3" data-number="1.3.1">
-<h3 data-number="1.3.1" class="anchored" data-anchor-id="academic-reports"><span class="header-section-number">1.3.1</span> Academic reports</h3>
-<p>Quarto has many nice features that facilitates publishing academic reports in <a href="https://quarto.org/docs/authoring/front-matter.html">this guide</a></p>
-</section>
-<section id="global-execution-options" class="level3" data-number="1.3.2">
-<h3 data-number="1.3.2" class="anchored" data-anchor-id="global-execution-options"><span class="header-section-number">1.3.2</span> Global execution options</h3>
-<p>If you want to apply an option globally, you can include in the header, under <code>execute</code>. For example adding the following line to the header make code not show up, by default:</p>
-<pre><code>execute:
-  echo: false</code></pre>
-</section>
-<section id="more-on-markdown" class="level3" data-number="1.3.3">
-<h3 data-number="1.3.3" class="anchored" data-anchor-id="more-on-markdown"><span class="header-section-number">1.3.3</span> More on markdown</h3>
-<p>There is a lot more you can do with R markdown. We highly recommend you continue learning as you gain more experience writing reports in R. There are many free resources on the internet including:</p>
-<ul>
-<li>RStudio’s tutorial: <a href="https://quarto.org/docs/get-started/hello/rstudio.html" class="uri">https://quarto.org/docs/get-started/hello/rstudio.html</a></li>
-<li>The knitR book: <a href="https://yihui.name/knitr/" class="uri">https://yihui.name/knitr/</a></li>
-<li>Pandoc’s Markdown <a href="https://pandoc.org/MANUAL.html#pandocs-markdown">in-depth documentation</a></li>
-</ul>
-</section>
-</section>
-<section id="sec-knitr" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="sec-knitr"><span class="header-section-number">1.4</span> knitR</h2>
-<p>We use the <strong>knitR</strong> package to compile Quarto. The specific function used to compile is the <code>knit</code> function, which takes a file name as input. RStudio provides the <strong>Render</strong> button that makes it easier to compile the document.</p>
-<p>Note that the first time you click on the <em>Render</em> button, a dialog box may appear asking you to install packages you need. Once you have installed the packages, clicking <em>Render</em> will compile your Quarto file and the resulting document will pop up.</p>
-<p>This particular example produces an html document which you can see in your working directory. To view it, open a terminal and list the files. You can open the file in a browser and use this to present your analysis. You can also produce a PDF or Microsoft document by changing:</p>
-<p><code>format: html</code> to <code>format: pdf</code> or <code>format: docx</code>. We can also produce documents that render on GitHub using <code>format: gfm</code>, which stands for GitHub flavored markdown, a convenient way to share your reports.</p>
-</section>
-<section id="exercises" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="exercises"><span class="header-section-number">1.5</span> Exercises</h2>
+<section id="measles" class="level2">
+<h2 class="anchored" data-anchor-id="measles">Measles</h2>
 <ol class="example" type="1">
-<li><p>Write a Quarto document that defines variables <span class="math inline">\(a=1, b=-1, c=-2\)</span> and print out the solutions to <span class="math inline">\(f(x) = ax^2+bx+c=0\)</span>. Do not report complex solutions, only real numbers.</p></li>
-<li><p>Include a graph of <span class="math inline">\(f(x)\)</span> versus <span class="math inline">\(x\)</span> for <span class="math inline">\(x \in (-5,5)\)</span>.</p></li>
+<li><p>Load the <strong>dslabs</strong> package and figure out what is in the <code>us_contagious_diseases</code> dataset. Create a data frame, call it <code>avg</code>, that has a column for <code>year</code>, and a <code>rate</code> column containing the cases of Measles per 10,000 people per year in the US. Because we start in 1928, exclude Alaska and Hawaii. Make sure to take into account the number of weeks reporting each year. If a week was not report, it should not be included in the calculation of the rate.</p></li>
+<li><p>Use the data frame <code>avg</code> to make a trend plot showing the cases rate for Measles per year. Add a vertical line showing the year the Measles vaccines was introduced. Write a short paragraph describing the graph to someone you are urging to take the Measles vaccines.</p></li>
+<li><p>Is the pattern observed above the same for each state? Add a grey trend line for each state to the plot above. Use a transformation that keeps the high rates from dominating the figure.</p></li>
+<li><p>In the plot above we can’t tell which state is which curve. Using color would be challenging as it is hard if not impossible to find 48 colors we humans can distinguish. To make a plot where you can compare states knowing which is which, use one of the axis for state and the other for year, and then use hue or intensity as a visual cue for rates. Use a <code>sqrt</code> transformation to avoid the higher rates taking up all the color scale. Use grey to denote missing data. Order the states based on their highest peak.</p></li>
 </ol>
-<p>This is how you make a plot of a quadratic function:</p>
-<div class="cell" data-hash="01-quarto_cache/html/unnamed-chunk-4_ef1992df9003e9233f981e1d2ed5d0e0">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">1</span> </span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">1</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">2</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">length =</span> <span class="dv">300</span>)</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, a<span class="sc">*</span>x<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> b<span class="sc">*</span>x <span class="sc">+</span> c, <span class="at">type =</span> <span class="st">"l"</span>)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="01-quarto_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</section>
+<section id="covid-19" class="level2">
+<h2 class="anchored" data-anchor-id="covid-19">COVID-19</h2>
+<ol start="5" class="example" type="1">
+<li>The csv file shared <a href="https://raw.githubusercontent.com/datasciencelabs/2023/main/data/covid19-data.csv">here</a> includes weekly data on SARS-CoV-2 reported cases, tests, COVID-19 hospitalizations and deaths, and vaccination rates by state.</li>
+</ol>
+<ul>
+<li>Import the file into R without making a copy on your computer.</li>
+<li>Examine the dataset.</li>
+<li>Write a sentence describing each variable in the dataset.</li>
+</ul>
+<ol start="6" class="example" type="1">
+<li><p>One of these columns could benefit from being a factor. Identify the column and convert it to factor.</p></li>
+<li><p>Rather than providing a date, the dataset provides MMWR year and week. Read <a href="https://ndc.services.cdc.gov/wp-content/uploads/MMWR_Week_overview.pdf">this document</a> and write a function to convert these to the start of the MMWR week in ISO-8601.</p></li>
+<li><p>Add a columns <code>start_date</code> and <code>end_date</code> with the start and end of the MMWR week. Confirm that it worked by computing the MMWR week and year for both start and end date and comparing it to the MMWR week and year provided.</p></li>
+<li><p>Make a trend plot similar to the one we made for Measles:</p></li>
+</ol>
+<ul>
+<li>Include a trend line for the US cases rate. Use per 100,000 person per week as the unit.</li>
+<li>Add a trend for each state, with color representing region.</li>
+<li>Use the end of the week date for your x-axis.</li>
+<li>Add a vertical dashed line on the day COVID-19 vaccination started being delivered in the US.</li>
+</ul>
+<p>Write a paragraph describing the COVID-19 pandemic by describing the plot.</p>
+<ol start="10" class="example" type="1">
+<li>The number of cases depends on testing capacity. Note that during the start of the pandemic, when we know many people died, there are not that many cases reported. Also notice somewhat large variability across states that might not be consistent with actual prevalence. The <code>tests</code> columns provides the cumulative number of tests performed by the data represented by the week. This data is not official CDC data. It was provided by Johns Hopkins Coronavirus Resource Center. Before using the data, explore the data for each state carefully looking for potential problems.</li>
+</ol>
+<p>For each state compute and plot the number of tests perforemd each week. Look at the plot for each state and look for possible problems. No need to make this plot pretty since we are just using it for data exploration. Report any inconsistencies if any.</p>
+<ol start="11" class="example" type="1">
+<li><p>To see if the inconsistencies seen in the previous plot are a problem if we are only going to look at the total number of tests at the end, plot the cumulative tests for each of the states with inconsistencies and see if the results are sensible. Explain your answer in 1-2 sentences.</p></li>
+<li><p>JHU stopped reporting some time in 2020. What was that date? Show the day in the format September 18, 2022.</p></li>
+<li><p>Compute the number of tests per capita for the last day JHU reported these statistics. Make a boxplot of these values for each region and include the state level data with the state abbreviation as a label. Write a sentences describing these differences you see and how this could affect our interpretation of differences in cases rates across states.</p></li>
+<li><p>Although JHU stopped collecting testing data from the states, the CDC collected data from a few laboratories. We provide these date in <a href="https://raw.githubusercontent.com/datasciencelabs/2023/main/data/covid19-tests.txt">this url</a>.</p></li>
+</ol>
+<ul>
+<li>Import the data into R without downloading the file.</li>
+<li>Make sure that you create a data frame with a column with dates in <code>Dates</code> format and tests as numbers.</li>
+</ul>
+<ol start="15" class="example" type="1">
+<li>Plot the tests per week to see the trend in time. Write a sentence of the pattern you see.</li>
+</ol>
+<p>At the start of the pandemic there were few tests conducted and now we are also seeing a drop.</p>
+<ol start="16" class="example" type="1">
+<li>The analysis on tests points to cases as not being a good measure of the state of the pandemic. Remake the trend plot but using death rates instead of cases rates. Write a sentence on how this plot better shows about the start of the pandemic that the cases plot did not.</li>
+</ol>
+<p>We see that the highest death rates were actually at the start of the pandemic and that is was particularly bad in the northeast.</p>
+<ol start="17" class="example" type="1">
+<li>We want to examine the percent of the population that completed the first series of vaccines, received the booster, and received the bivalent booster, respectively. First run this line of code and examine what it does.</li>
+</ol>
+<div class="cell" data-hash="pset1_cache/html/unnamed-chunk-1_48866c6e118ece4e38cf10b831478ae7">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> dat <span class="sc">|&gt;</span> </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(series_complete, booster, bivalent), <span class="at">names_to =</span> <span class="st">"series"</span>, <span class="at">values_to =</span> <span class="st">"percent"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(state, region, population, end_date, series, percent) <span class="sc">|&gt;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(percent)) <span class="sc">|&gt;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percent =</span> percent<span class="sc">/</span>population,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">series =</span> <span class="fu">factor</span>(series, <span class="fu">c</span>(<span class="st">"series_complete"</span>, <span class="st">"booster"</span>, <span class="st">"bivalent"</span>))) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<ol start="3" class="example" type="1">
-<li><p>Generate a PDF report using knitr. Do not show the R code, only the solutions and explanations of what the reader is seeing.</p></li>
-<li><p>Erase the PDF report and reproduce it but this time using <span class="math inline">\(a=1, b=2, c=5\)</span>.</p></li>
-<li><p>Erase the PDF report and reproduce it but this time using <span class="math inline">\(a=1, b=3, c=2\)</span>.</p></li>
-<li><p>Create an HTML page with the results for this last set of values, but this time showing the code.</p></li>
+<p>Then make a plot showing the percent of population vaccination for each state. Use color to represent region.</p>
+<ul>
+<li>Show the dates on the x axis with the month abbreviation and year.</li>
+<li>Place the three plots vertically, on top of each other.</li>
+<li>Show percentages on the y axis. Hint: use <code>scales::percent</code>.</li>
+</ul>
+<ol start="18" class="example" type="1">
+<li><p>For each period used to make the trend plot for the three series, make a boxplot showing the maximum percentage reached by every state stratified by region. Let the range of the y axis adapt to the range of each group.</p></li>
+<li><p>Use the plot above to define four periods: No vaccine, First vaccine, Booster, and Bivalent. Get the dates when each vaccine series starts (these don’t have to be exact). Create a version of your data frame with a column called period that keeps the period associated with the week contained in each row.</p></li>
+<li><p>Define a new variable that stores the maximum vaccination percentage reached during each period. But for the first vaccine period use <code>series_complete</code>, for the booster period use the <code>booster</code> column, and for the bivalent period use the bivalent percentages. Remove data from the no vaccine period. The make a plot comparing the COVID-19 death rate to the percent vaccinated. Use color to denote region. You should produce three plots, each with it’s own axes range. Put the three plots in three entries of a 2x2 layout. Comment on what you observe.</p></li>
+<li><p>Does population density have an effect on infections? Use the <code>state.area</code> predefined variable to add compute population density. Make a histogram and density plot of state densities. Note that you will have to add the geographical area for Puerto Rico and DC as it is not included in <code>state.area</code></p></li>
+<li><p>Plot death rates versus density for the four periods defined above.</p></li>
 </ol>
 
 
@@ -722,15 +589,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./schedule.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Schedule</span>
+      <a href="./09-data-table.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">data.table</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./02-unix.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Unix</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./10-distributions.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Distributions</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
