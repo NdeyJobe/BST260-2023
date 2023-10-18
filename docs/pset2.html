@@ -64,6 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./20-regression.html" rel="next">
 <link href="./19-models.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -286,6 +287,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Problem Set 2</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -382,76 +389,65 @@ Y_{ij} = \mu_i + \varepsilon_{ij}
 <section id="us-census-apis" class="level2">
 <h2 class="anchored" data-anchor-id="us-census-apis">US Census APIs</h2>
 <p>In June 2018, data was finally made public. This dataset gives you deaths by age group and sex obtained more recently from the Mortality Registry. In preparation for the analysis of these data, we will obtain population estimates from the US Census by age and gender.</p>
-<p>We will be using three different APIs as that is how the Census makes the data available. Important to note that in two of these APIs, all ages 85 or above are grouped into one group.</p>
+<p>We will be using two different APIs as that is how the Census makes the data available. Important to note that in two of these APIs, all ages 85 or above are grouped into one group.</p>
 <p>If you wish to skip this section (though you will lose points), you can obtain the already wrangled population data <a href="https://github.com/datasciencelabs/2023/raw/main/data/population.rds">here</a>.</p>
 <ol start="9" class="example" type="1">
 <li><p>First step is to obtain a census key. You can request one here <a href="https://api.census.gov/data/key_signup.html" class="uri">https://api.census.gov/data/key_signup.html</a>. Once you have a key create a file in your directory called <code>census-key.R</code> that simply defines the variable <code>census_key</code> to be your personal key. Do not share this key publicly. The quarto file you turn in should not show your census key, instead it should source a file called <code>census-key.R</code> to define the variable. We will have a file on our end with our key so your script can knit.</p></li>
-<li><p>Once you have your key you can use the <code>httr2</code> package to download the data directly from the Census data base. We will start downloading data from 2000-2009. We will download it only for Puerto Rico which has region ID 72. The following code downloads the data.</p></li>
+<li><p>Once you have your key you can use the <code>httr2</code> package to download the data directly from the Census data base. We will start downloading the intercensus data from 2000-2009 (<a href="https://www.census.gov/data/developers/data-sets/popest-popproj/popest/popest-vars.2000-2010_Intercensals.html#list-tab-794389051">data dictionary here</a>). We will download it only for Puerto Rico which has region ID 72. The following code downloads the data.</p></li>
 </ol>
-<div class="cell" data-hash="pset2_cache/html/unnamed-chunk-3_3caab1642c4b04601b448735348ba359">
+<div class="cell" data-hash="pset2_cache/html/unnamed-chunk-3_96edd9f63d6203430417b36d1bc32aad">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"https://api.census.gov/data/2000/pep"</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>api_name <span class="ot">&lt;-</span> <span class="st">"int_charage"</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"census-key.R"</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>endpoint <span class="ot">&lt;-</span> <span class="fu">paste0</span>(api_name, <span class="st">"?get=POP,SEX,AGE,DATE_&amp;for=state:72&amp;key="</span>, census_key)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>response <span class="ot">&lt;-</span> <span class="fu">request</span>(url) <span class="sc">|&gt;</span> </span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">req_url_path_append</span>(endpoint) <span class="sc">|&gt;</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">req_perform</span>()  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"census-key.R"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>endpoint <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"int_charage?get=POP,SEX,AGE,DATE_&amp;for=state:72&amp;key="</span>, census_key)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>response <span class="ot">&lt;-</span> <span class="fu">request</span>(url) <span class="sc">|&gt;</span> </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">req_url_path_append</span>(endpoint) <span class="sc">|&gt;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">req_perform</span>()  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The data is now included in <code>response</code> and you can access it using the functions. Examine the results you obtain when applying <code>resp_body_string</code>. Write code to convert this into a data frame with columns names <code>year</code>, <code>sex</code>, <code>age</code>, and <code>population</code>. Hint: Use the function <code>fromJSON</code> from the <strong>jsonlite</strong> package. The functions <code>row_to_names</code> and <code>clean_names</code> from the <strong>janitor</strong> package might also be handy.</p>
+<p>The data is now included in <code>response</code> and you can access it using the <code>resp</code> functions in <strong>httr2</strong>. Examine the results you obtain when applying <code>resp_body_string</code>. Write code to convert this into a data frame with columns names <code>year</code>, <code>sex</code>, <code>age</code>, and <code>population</code> and call it <code>pop1</code>. Hint: Use the function <code>fromJSON</code> from the <strong>jsonlite</strong> package. The functions <code>row_to_names</code> and <code>clean_names</code> from the <strong>janitor</strong> package might also be handy. Use the codebook to understand how the <code>date</code> column relates to year.</p>
 <ol start="11" class="example" type="1">
-<li>Now we will obtain data for 2010-2014. We can follow a similar procedure but with the following API and endpoints:</li>
+<li>Now we will obtain data for 2010-2019. The intercensal data is not available so we will use <em>Vintage</em> 2019 data (<a href="https://www.census.gov/data/developers/data-sets/popest-popproj/popest/popest-vars.Vintage_2019.html">data dictionary here</a>). We can follow a similar procedure but with the following API and endpoints:</li>
 </ol>
-<div class="cell" data-hash="pset2_cache/html/unnamed-chunk-4_e4c2e49d0595c798b0f00e8a9f960f57">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"https://api.census.gov/data/2014/pep"</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>api_name <span class="ot">&lt;-</span> <span class="st">"prcagesex"</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"census-key.R"</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>endpoint <span class="ot">&lt;-</span> <span class="fu">paste0</span>(api_name, <span class="st">"?get=POP,SEX,AGE,DATE_&amp;for=state:72&amp;key="</span>, census_key)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="pset2_cache/html/unnamed-chunk-4_2062f489d534a6c89441bbcbfb8cffa9">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"https://api.census.gov/data/2019/pep"</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"census-key.R"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>endpoint <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"charage?get=POP,SEX,AGE,DATE_CODE&amp;for=state:72&amp;key="</span>, census_key)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Download the data and write code to convert this into a data frame with columns names <code>year</code>, <code>sex</code>, <code>age</code>, and <code>population</code> and call it <code>pop2</code>.</p>
 <ol start="12" class="example" type="1">
-<li>Finally we will ge data for 2015-2017. These are available in different APIs.</li>
-</ol>
-<div class="cell" data-hash="pset2_cache/html/unnamed-chunk-5_227a8a6b2afecba14273e450ea5eb9c7">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>year <span class="ot">&lt;-</span> <span class="dv">2015</span> <span class="do">## need to also get 2016 and 2017</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"https://api.census.gov/data/"</span>, year, <span class="st">"/pep"</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>api_name <span class="ot">&lt;-</span> <span class="st">"charage"</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"census-key.R"</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>endpoint <span class="ot">&lt;-</span> <span class="fu">paste0</span>(api_name, <span class="st">"?get=POP,SEX,AGE,DATE_&amp;for=state:72&amp;key="</span>, census_key)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ol start="13" class="example" type="1">
-<li>Combine all data frames you created in the previous exercises to form one population data frame including all year. Make sure the 85+ category is correctly computed on all three datasets. Save it to a file called <code>population.rds</code> in your rds.</li>
+<li>Combine the data frames <code>pop1</code> and <code>pop2</code> created in the previous exercises to form one population data frame called <code>population</code> and including all year. Make sure the 85+ category is correctly computed on the two datasets. Save it to a file called <code>population.rds</code> in your rds.</li>
 </ol>
 </section>
 <section id="daily-count-data" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="daily-count-data">Daily count data</h2>
 <p>Let’s repeat the analysis done in the preprint but now using 2002-2016 data and, to better see the effect of the hurricane, let’s use weekly instead of monthly and start our weeks on the day the hurricane hit.</p>
 <p>You can load the data from the <strong>excessmort</strong> package.</p>
-<div class="cell" data-hash="pset2_cache/html/unnamed-chunk-6_18501b75adefbff25c428981af68b8a6">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"puerto_rico_counts"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="pset2_cache/html/unnamed-chunk-5_242aa88a90ef0233bdc45ef01302de1d">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"puerto_rico_counts"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<ol start="14" class="example" type="1">
-<li><p>Define an object <code>counts</code> by wrangling <code>puerto_rico_counts</code> to 1) include data only from 2000-2017, 2) remove the population column, and 3) to match our population, combine the counts for those 85 and older together.</p></li>
+<ol start="13" class="example" type="1">
+<li><p>Define an object <code>counts</code> by wrangling <code>puerto_rico_counts</code> to 1) include data only from 2002-2017, 2) remove the population column, and 3) to match our population, combine the counts for those 85 and older together.</p></li>
 <li><p>Collapse the population data so that it combines agegroups like <code>counts</code>. Also change the <code>sex</code> column so that it matches <code>counts</code> as well.</p></li>
 <li><p>Add a population column to <code>counts</code> using the <code>population</code> data frame you just created.</p></li>
 <li><p>Use R to determine what day of the week did María make landfall in PR.</p></li>
 <li><p>Redefine the date column to be the start of the week that day is part of. Use the day of the week María made landfall as the first day. Now collapse the data frame to weekly data by redefining <code>outcome</code> to have the total deaths that week for each sex and agegroup. Remove weeks that have less the 7 days. Finally, add a column with the MMWR week. Name the resulting data frame <code>weekly_counts</code></p></li>
-<li><p>Make a per-week version of the plot we made for monthly totals. Make a boxplot for each week based on the 2000-2016 data, then add red points for 2017. Comment on the possibility that indirect effect went past October.</p></li>
-<li><p>If we look at 2017 data before September and compare each week to the average from 2000-2016. What percent are below the median?</p></li>
+<li><p>Make a per-week version of the plot we made for monthly totals. Make a boxplot for each week based on the 2002-2016 data, then add red points for 2017. Comment on the possibility that indirect effect went past October.</p></li>
+<li><p>If we look at 2017 data before September and compare each week to the average from 2002-2016. What percent are below the median?</p></li>
 <li><p>Why are 2017 totals somewhat below-average? Plot the population in millions against date. What do you see?</p></li>
 <li><p>When comparing mortalisty across populations of different sizes, we need to look at rates not totals. Because the population is decreasing, this is particularly important. Redo the boxplots but for rates instead of totals.</p></li>
 <li><p>Now the rates are all way above average! What is going on? Compute and plot the population sizes against year for each sex of the following age groups: 0-19, 20-39, 40-59, 60+. Describe what you see in this plot then explain why 2017 has higher average death rates.</p></li>
-<li><p>Compute the death rates (deaths per 1,000 per year) by the agegroups for each year 2000-2016. Use a transformation of the y-axis that permits us to see the data clearly. Make a separate plot for males and females. Describe in two sentences what you learn.</p></li>
+<li><p>Compute the death rates (deaths per 1,000 per year) by the agegroups for each year 2002-2016. Use a transformation of the y-axis that permits us to see the data clearly. Make a separate plot for males and females. Describe in two sentences what you learn.</p></li>
 <li><p>Repeat the above but use <code>facet_wrap</code> with <code>scales = "free_y"</code> to get a closer look at the patterns for each age group. In this case use color to distinguish the sexes. Describe the pattern observed for the death rate over time.</p></li>
 </ol>
 </section>
 <section id="linear-models" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="linear-models">Linear models</h2>
-<ol start="26" class="example" type="1">
+<ol start="25" class="example" type="1">
 <li><p>We are going fit a linear model to account for the trend in death rates to obtain an more appropriate expected death rate for each agegroup and sex. Because we are fitting a linear model, it is preferable to have normally distributed data. We want the number of deaths per week to be larger than 10 for each group. Compute the average number of deaths per week by agegroup and sex for 2016. Based on these data, what agegroups do you recommend we combine?</p></li>
 <li><p>Create a new dataset called <code>dat</code> that collapses the counts into agegroups with enough deaths to fit a linear model. Remove any week with MMWR week 53 and add a column <code>t</code> that includes the number of weeks since the first week in the first year.</p></li>
 <li><p>Write a function that receives a data frame <code>tab</code>, fits a linear model with a line for the time trend, and returns a data frame with 2017 data including a prediction.</p></li>
 <li><p>Use the <code>group_modify</code> function to fit this model to each sex and agegroup. Save the results in <code>res</code>.</p></li>
 <li><p>For agegroup and by sex, plot the expected counts for each week with an error bar showing two standard deviations and in red the observed counts. Does the model appear to fit? Hint: Look to see if the red dots are inside the intervals before the hurricane.</p></li>
-<li><p>Now estimate weekly excess deaths for 2017 based on the rates esimated from 2000-2016 but the population sizes of 2017. Compare this to estimated standard deviation observed from year to year once we account for trends.</p></li>
+<li><p>Now estimate weekly excess deaths for 2017 based on the rates esimated from 2002-2016 but the population sizes of 2017. Compare this to estimated standard deviation observed from year to year once we account for trends.</p></li>
 <li><p>Plot cummulative excess death for 2017 including a standard error.</p></li>
 </ol>
 
@@ -699,6 +695,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./20-regression.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Regression</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
