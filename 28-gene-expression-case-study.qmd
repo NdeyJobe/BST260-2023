@@ -1,0 +1,53 @@
+# Case Study: Differential expression between ethnicity 
+
+>>> Variation in DNA sequence contributes to individual differences in quantitative traits, but in humans the specific sequence variants are known for very few traits. We characterized variation in gene expression in cells from individuals belonging to three major population groups. This quantitative phenotype differs significantly between European-derived and Asian-derived populations for 1,097 of 4,197 genes tested. For the phenotypes with the strongest evidence of cis determinants, most of the variation is due to allele frequency differences at cis-linked regulators. The results show that specific genetic variation among populations contributes appreciably to differences in gene expression phenotypes. Populations differ in prevalence of many complex genetic diseases, such as diabetes and cardiovascular disease. As some of these are probably influenced by the level of gene expression, our results suggest that allele frequency differences at regulatory polymorphisms also account for some population differences in prevalence of complex diseases.
+
+```{r}
+#| eval: false
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("Biobase")
+
+if (!require("devtools", quietly = TRUE))
+    install.packages("devtools")
+
+devtools::install_github("genomicsclass/GSE5859")
+```
+
+```{r}
+library(Biobase)
+library(GSE5859)
+data(GSE5859)
+dim(exprs(e))
+pData(e)
+```
+
+
+1. Described the distribution of ethnic groups
+
+2. Create a factor`x` with the ethnic group information and a matrix `y` with the gene expression matrix.
+
+3. Remove the `HAN` group. Make sure you remove from both `x` and `y`
+
+4. Compute a t-test for the first gene comparing `ASN` to `CEU`. 
+
+5. Now use rowwise operations to compute t-test for each gene. How many genes have p-values smaller than 0.05 / number of tests?
+
+6. If the null hypothesis is true for all genes, and the genes are independent of each other, what distribution do you expect p-values to have? You can use a Monte Carlo.
+
+7. Under the null how many p-values smaller than 0.05 do you expect across all genes.
+
+8. Make histogram of the observed p-values.
+
+9. For the top 5 genes with smallest p-values make a boxplot of gene expression by group.
+
+10. Compute the first 5 PCs and see how they vary across time.
+
+11. Use the PCs to identified groups other than ethnic group.
+
+12. For the top genes, fit a linear model that includes these newly identified groups.
+
+
+
+

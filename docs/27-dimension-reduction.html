@@ -64,6 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./28-gene-expression-case-study.html" rel="next">
 <link href="./26-linear-algebra.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -334,6 +335,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Dimension reduction</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./28-gene-expression-case-study.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Case Study: Differential expression between ethnicity</span></span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -583,7 +590,7 @@ a_{21}&amp;a_{22}
 <ul>
 <li><p>Note that if <span class="math inline">\(\mathbf{A} \mathbf{A}^\top = \mathbf{I}\)</span> then the distance between the <span class="math inline">\(h\)</span>th and <span class="math inline">\(i\)</span>th rows is the same for the original and transformed data.</p></li>
 <li><p>We to transformation with the property <span class="math inline">\(\mathbf{A} \mathbf{A}^\top = \mathbf{I}\)</span> as <em>orthogonal transformations</em> and they are guaranteed to preserves the distance between any two points.</p></li>
-<li><p>Notice that <span class="math inline">\(\mathbf{A}\)</span> being orthogonal also guarantees that the total sum of squares of any row in <span class="math inline">\(\mathbf\)</span> is preserved after the transformation:</p></li>
+<li><p>Notice that <span class="math inline">\(\mathbf{A}\)</span> being orthogonal also guarantees that the total sum of squares of any row in <span class="math inline">\(\mathbf{X}\)</span> is preserved after the transformation:</p></li>
 </ul>
 <p><span class="math display">\[
 ||\mathbf{z}^\top_i||^2 =  ||\mathbf{x}^\top_i\mathbf{A}||^2 = \mathbf{x}_i \mathbf{A}\mathbf{A}^\top  \mathbf{x}^\top_i =  \mathbf{x}_i   \mathbf{x}^\top_i = ||\mathbf{x}^\top_i||^2
@@ -1158,6 +1165,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./28-gene-expression-case-study.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Case Study: Differential expression between ethnicity</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
