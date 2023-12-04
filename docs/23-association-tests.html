@@ -362,6 +362,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Machine learning basic concepts and evaluation metrics</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./32-conditional-expectations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Conditional probabilities and expectations</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./33-smoothing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Smoothing</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./34-cross-validation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Cross validation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./35-caret.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">The caret package</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./36-algorithms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Examples of algorithms</span></span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -382,7 +412,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#large-samples-small-p-values" id="toc-large-samples-small-p-values" class="nav-link" data-scroll-target="#large-samples-small-p-values"><span class="header-section-number">23.4</span> Large samples, small p-values</a></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">23.5</span> Exercises</a></li>
-  <li><a href="#optional-exercises-wint-appear-in-the-midterm" id="toc-optional-exercises-wint-appear-in-the-midterm" class="nav-link" data-scroll-target="#optional-exercises-wint-appear-in-the-midterm"><span class="header-section-number">23.6</span> Optional exercises (win’t appear in the midterm)</a></li>
+  <li><a href="#optional-exercises-wont-appear-in-the-midterm" id="toc-optional-exercises-wont-appear-in-the-midterm" class="nav-link" data-scroll-target="#optional-exercises-wont-appear-in-the-midterm"><span class="header-section-number">23.6</span> Optional exercises (won’t appear in the midterm)</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/datasciencelabs/2023/blob/main/23-association-tests.qmd" class="toc-action">View source</a></p><p><a href="https://github.com/datasciencelabs/2023/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -765,8 +795,27 @@ X-squared = 4.0631, df = 1, p-value = 0.04383</code></pre>
 </div>
 </div>
 <ol start="4" class="example" type="1">
-<li>Notice that the p-value is larger than 0.05 but the 95% confidence interval does not include 1. What explains this?</li>
+<li>Notice that p-values obtained with the four approaches that produce three different p-values:</li>
 </ol>
+<div class="cell" data-hash="23-association-tests_cache/html/unnamed-chunk-21_e121e0f4bbd348cee87c4a32cc66b0d6">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(mat)<span class="sc">$</span>p.value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.08037602</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(mat, <span class="at">correct =</span> <span class="cn">FALSE</span>)<span class="sc">$</span>p.value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0438292</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span><span class="fu">pnorm</span>(<span class="sc">-</span><span class="fu">abs</span>(lor<span class="sc">/</span>se))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.05150641</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">glm</span>(mat <span class="sc">~</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>), <span class="at">family =</span> <span class="st">"binomial"</span>))<span class="sc">$</span>coef[<span class="dv">2</span>,<span class="dv">4</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0515064</code></pre>
+</div>
+</div>
+<p>Why is this?</p>
 <ol type="a">
 <li>We made a mistake in our code.</li>
 <li>These are based on t-statistics so the connection between p-value and confidence intervals does not apply.</li>
@@ -778,34 +827,34 @@ X-squared = 4.0631, df = 1, p-value = 0.04383</code></pre>
 <li>Multiply the two-by-two table by 2 and see if the p-value and confidence retrieval are a better match.</li>
 </ol>
 </section>
-<section id="optional-exercises-wint-appear-in-the-midterm" class="level2" data-number="23.6">
-<h2 data-number="23.6" class="anchored" data-anchor-id="optional-exercises-wint-appear-in-the-midterm"><span class="header-section-number">23.6</span> Optional exercises (win’t appear in the midterm)</h2>
+<section id="optional-exercises-wont-appear-in-the-midterm" class="level2" data-number="23.6">
+<h2 data-number="23.6" class="anchored" data-anchor-id="optional-exercises-wont-appear-in-the-midterm"><span class="header-section-number">23.6</span> Optional exercises (won’t appear in the midterm)</h2>
 <ol start="6" class="example" type="1">
 <li>When analyzing the trump tweets we computed <code>sentiment_counts</code> like this:</li>
 </ol>
-<div class="cell" data-hash="23-association-tests_cache/html/unnamed-chunk-21_6e31cca5081fc272e318233d0cb52581">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>links <span class="ot">&lt;-</span> <span class="st">"https://t.co/[A-Za-z</span><span class="sc">\\</span><span class="st">d]+|&amp;amp;"</span></span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>nrc <span class="ot">&lt;-</span> <span class="fu">get_sentiments</span>(<span class="st">"nrc"</span>) <span class="sc">|&gt;</span> <span class="fu">select</span>(word, sentiment)</span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>android_iphone <span class="ot">&lt;-</span> trump_tweets <span class="sc">|&gt;</span> </span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract</span>(source, <span class="st">"source"</span>, <span class="st">"Twitter for (.*)"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(source <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Android"</span>, <span class="st">"iPhone"</span>) <span class="sc">&amp;</span></span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>           created_at <span class="sc">&gt;=</span> <span class="fu">ymd</span>(<span class="st">"2015-06-17"</span>) <span class="sc">&amp;</span> </span>
-<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>           created_at <span class="sc">&lt;</span> <span class="fu">ymd</span>(<span class="st">"2016-11-08"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>is_retweet) <span class="sc">|&gt;</span></span>
-<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(created_at) <span class="sc">|&gt;</span> </span>
-<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">text =</span> <span class="fu">str_replace_all</span>(text, links, <span class="st">""</span>))  <span class="sc">|&gt;</span></span>
-<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, text) <span class="sc">|&gt;</span></span>
-<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>word <span class="sc">%in%</span> stop_words<span class="sc">$</span>word <span class="sc">&amp;</span></span>
-<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>           <span class="sc">!</span><span class="fu">str_detect</span>(word, <span class="st">"^</span><span class="sc">\\</span><span class="st">d+$"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">word =</span> <span class="fu">str_replace</span>(word, <span class="st">"^'"</span>, <span class="st">""</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>word <span class="sc">%in%</span> stop_words<span class="sc">$</span>word)</span>
-<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a>sentiment_counts <span class="ot">&lt;-</span> android_iphone <span class="sc">|&gt;</span></span>
-<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(nrc, <span class="at">by =</span> <span class="st">"word"</span>, <span class="at">relationship =</span> <span class="st">"many-to-many"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(source, sentiment) <span class="sc">|&gt;</span></span>
-<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">"source"</span>, <span class="at">values_from =</span> <span class="st">"n"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb36-22"><a href="#cb36-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sentiment =</span> <span class="fu">replace_na</span>(sentiment, <span class="at">replace =</span> <span class="st">"none"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="23-association-tests_cache/html/unnamed-chunk-22_a05890774c196c8281c5a11bcfe8f082">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>links <span class="ot">&lt;-</span> <span class="st">"https://t.co/[A-Za-z</span><span class="sc">\\</span><span class="st">d]+|&amp;amp;"</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>nrc <span class="ot">&lt;-</span> <span class="fu">get_sentiments</span>(<span class="st">"nrc"</span>) <span class="sc">|&gt;</span> <span class="fu">select</span>(word, sentiment)</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>android_iphone <span class="ot">&lt;-</span> trump_tweets <span class="sc">|&gt;</span> </span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract</span>(source, <span class="st">"source"</span>, <span class="st">"Twitter for (.*)"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(source <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Android"</span>, <span class="st">"iPhone"</span>) <span class="sc">&amp;</span></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>           created_at <span class="sc">&gt;=</span> <span class="fu">ymd</span>(<span class="st">"2015-06-17"</span>) <span class="sc">&amp;</span> </span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>           created_at <span class="sc">&lt;</span> <span class="fu">ymd</span>(<span class="st">"2016-11-08"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>is_retweet) <span class="sc">|&gt;</span></span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(created_at) <span class="sc">|&gt;</span> </span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">text =</span> <span class="fu">str_replace_all</span>(text, links, <span class="st">""</span>))  <span class="sc">|&gt;</span></span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, text) <span class="sc">|&gt;</span></span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>word <span class="sc">%in%</span> stop_words<span class="sc">$</span>word <span class="sc">&amp;</span></span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a>           <span class="sc">!</span><span class="fu">str_detect</span>(word, <span class="st">"^</span><span class="sc">\\</span><span class="st">d+$"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">word =</span> <span class="fu">str_replace</span>(word, <span class="st">"^'"</span>, <span class="st">""</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>word <span class="sc">%in%</span> stop_words<span class="sc">$</span>word)</span>
+<span id="cb44-17"><a href="#cb44-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-18"><a href="#cb44-18" aria-hidden="true" tabindex="-1"></a>sentiment_counts <span class="ot">&lt;-</span> android_iphone <span class="sc">|&gt;</span></span>
+<span id="cb44-19"><a href="#cb44-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(nrc, <span class="at">by =</span> <span class="st">"word"</span>, <span class="at">relationship =</span> <span class="st">"many-to-many"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb44-20"><a href="#cb44-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(source, sentiment) <span class="sc">|&gt;</span></span>
+<span id="cb44-21"><a href="#cb44-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">"source"</span>, <span class="at">values_from =</span> <span class="st">"n"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb44-22"><a href="#cb44-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sentiment =</span> <span class="fu">replace_na</span>(sentiment, <span class="at">replace =</span> <span class="st">"none"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Compute an odds ratio comparing Android to iPhone for each sentiment and add it to the table.</p>
 <ol start="7" class="example" type="1">
